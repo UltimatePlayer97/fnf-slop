@@ -132,40 +132,6 @@
     <span id="toastMessage">Copied to clipboard!</span>
   </div>
 
-
-  <!-- KEYBINDS: top-right button (menu + pause only) -->
-  <button id="btnKeybinds" type="button" title="Customise Keybinds"
-    class="btn-fnf hidden fixed top-3 right-3 sm:top-4 sm:right-4 z-[60] items-center gap-1.5 px-3 py-2 sm:px-4 rounded-xl bg-[#00FFFF] text-slate-950 font-fnf text-base sm:text-lg tracking-wider cursor-pointer -skew-x-6">
-    <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="6" width="20" height="12" rx="2.5" />
-      <path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10" />
-    </svg>
-    <span>KEYBINDS</span>
-  </button>
-
-  <!-- KEYBINDS MODAL -->
-  <div id="keybindOverlay" class="hidden fixed inset-0 z-[70] flex items-center justify-center p-3 bg-slate-950/85 backdrop-blur-md overflow-y-auto">
-    <div class="w-full max-w-2xl bg-[#140F29] comic-card rounded-3xl p-4 sm:p-6 my-auto animate-pop-in relative overflow-hidden">
-      <div class="stage-stripes h-2 w-full absolute top-0 left-0"></div>
-      <div class="text-center mt-1 mb-3">
-        <h2 class="font-fnf text-4xl sm:text-5xl text-white ink-text">KEYBINDS</h2>
-        <p id="keybindHelp" class="text-slate-300 text-xs sm:text-sm font-semibold">Click a key box, then press new key. ESC cancels. Duplicate key steals from old slot.</p>
-      </div>
-
-      <div class="flex gap-2 mb-3">
-        <button type="button" data-kbtab="solo" class="kb-tab btn-fnf flex-1 py-1.5 rounded-xl font-fnf text-lg cursor-pointer">1P / LAN</button>
-        <button type="button" data-kbtab="2p" class="kb-tab btn-fnf flex-1 py-1.5 rounded-xl font-fnf text-lg cursor-pointer">LOCAL 2P</button>
-      </div>
-
-      <div id="keybindBody" class="bg-slate-950/80 border-2 border-slate-800 rounded-2xl p-3 sm:p-4"></div>
-
-      <div class="flex gap-2.5 mt-4">
-        <button id="btnKeybindReset" type="button" class="btn-fnf flex-1 py-2.5 rounded-2xl bg-amber-400 text-slate-950 font-fnf text-lg sm:text-xl tracking-wider cursor-pointer -skew-x-3">RESET DEFAULTS</button>
-        <button id="btnKeybindClose" type="button" class="btn-fnf flex-1 py-2.5 rounded-2xl bg-[#12FA05] text-slate-950 font-fnf text-lg sm:text-xl tracking-wider cursor-pointer -skew-x-3">DONE</button>
-      </div>
-    </div>
-  </div>
-
   <!-- In-Game Top-Right Controls: Solo/Local (Reset + Pause) vs LAN Multiplayer (Leave Match) -->
   <div id="gameplayControls" class="hidden fixed top-3 right-3 sm:top-4 sm:right-4 z-30 flex items-center gap-2 sm:gap-2.5">
     <!-- Solo & Local 2P Controls -->
@@ -177,7 +143,7 @@
           <path d="M3 3v5h5" />
         </svg>
         <span>RESET</span>
-        <span id="hudResetKeyLabel" class="hidden md:inline-block px-1.5 py-0.5 text-[10px] rounded bg-slate-950/20 font-mono-num">R</span>
+        <span class="hidden md:inline-block px-1.5 py-0.5 text-[10px] rounded bg-slate-950/20 font-mono-num">R</span>
       </button>
 
       <button id="btnPauseHud" type="button" title="Pause Game (P or Esc)"
@@ -399,10 +365,10 @@
               <div class="inline-block px-2.5 py-0.5 rounded bg-[#00FFFF]/20 border border-[#00FFFF] text-[#00FFFF] text-[10px] font-extrabold uppercase mb-1.5">Player 2 • Guest</div>
               <h3 class="font-fnf text-2xl text-white">JOIN LAN ROOM</h3>
               <p class="text-xs text-slate-300 mt-1 mb-2.5">
-                Enter the 4-letter Room Code shown on the Host's screen:
+                Enter the Room Code shown on the Host's screen:
               </p>
-              <input id="joinRoomCodeInput" type="text" maxlength="4" placeholder="BEAT"
-                class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border-2 border-slate-700 focus:border-[#00FFFF] focus:outline-none text-center font-mono-num text-2xl font-extrabold uppercase tracking-[0.35em] text-[#00FFFF]" />
+              <input id="joinRoomCodeInput" type="text" maxlength="12" placeholder="K7M2QX"
+                class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border-2 border-slate-700 focus:border-[#00FFFF] focus:outline-none text-center font-mono-num text-2xl font-extrabold uppercase tracking-[0.2em] text-[#00FFFF]" />
             </div>
             <button id="btnJoinLanRoom" type="button"
               class="btn-fnf w-full py-3 rounded-xl bg-gradient-to-r from-[#00FFFF] to-[#12FA05] text-slate-950 font-fnf text-xl tracking-wider cursor-pointer">
@@ -587,7 +553,7 @@
         </button>
         <button id="btnRestartFromPause" type="button"
           class="btn-fnf w-full py-3 rounded-2xl bg-amber-400 text-slate-950 font-fnf text-xl tracking-wider cursor-pointer -skew-x-3">
-          RESTART SONG (<span id="pauseResetKeyLabel">R</span>)
+          RESTART SONG (R)
         </button>
         <button id="btnQuitToMenu" type="button"
           class="btn-fnf w-full py-3 rounded-2xl bg-slate-700 text-white font-fnf text-xl tracking-wider cursor-pointer -skew-x-3">
@@ -884,27 +850,28 @@
         pc.close();
         say('2) STUN candidate types gathered: [' + types.join(',') + '] ' + (types.includes('srflx') ? 'PASS (STUN reachable)' : 'no srflx -> UDP to STUN blocked (firewall/VPN) or offline'));
       } catch (e) { say('2) STUN test threw: ' + e); }
-      // 3) PeerJS broker HTTP + websocket
-      const cfg = Object.assign({ host: '0.peerjs.com', port: 443, path: '/', secure: true }, window.FNF_PEER_CONFIG || {});
-      const base = (cfg.secure ? 'https://' : 'http://') + cfg.host + ':' + cfg.port + (cfg.path || '/');
+      // 3) relay HTTP + 4) relay WebSocket
+      const httpBase = RELAY_URL.replace(/^ws/, 'http');
       try {
-        const r = await Promise.race([fetch(base + 'peerjs/id'), new Promise((_, rej) => setTimeout(() => rej(new Error('timeout 6s')), 6000))]);
-        say('3) PeerJS broker HTTP ' + base + ': ' + (r.ok ? 'PASS (' + r.status + ')' : 'FAIL status ' + r.status));
-      } catch (e) { say('3) PeerJS broker HTTP FAIL: ' + e + ' (blocked/DNS/offline/adblock/CSP)'); }
+        const r = await Promise.race([fetch(httpBase), new Promise((_, rej) => setTimeout(() => rej(new Error('timeout 6s')), 6000))]);
+        const t = await r.text();
+        say('3) relay HTTP ' + httpBase + ': ' + (r.ok && t.includes('fnf relay ok') ? 'PASS' : 'status ' + r.status + ' body ' + t.slice(0, 40)));
+      } catch (e) { say('3) relay HTTP FAIL: ' + e + ' (blocked/DNS/offline/adblock/CSP)'); }
       try {
-        const wsUrl = (cfg.secure ? 'wss://' : 'ws://') + cfg.host + ':' + cfg.port + (cfg.path || '/') + 'peerjs?key=peerjs&id=fnftest' + Math.random().toString(36).slice(2, 8) + '&token=' + Math.random().toString(36).slice(2);
-        const ok = await new Promise((res) => {
-          let ws; const t = setTimeout(() => { try { ws.close(); } catch (e) {} res('timeout 6s'); }, 6000);
-          try { ws = new WebSocket(wsUrl); } catch (e) { clearTimeout(t); res('ctor ' + e); return; }
-          ws.onmessage = (m) => { clearTimeout(t); try { ws.close(); } catch (e) {} res('PASS ' + String(m.data).slice(0, 60)); };
-          ws.onerror = () => { clearTimeout(t); res('websocket error'); };
-          ws.onclose = (e) => { clearTimeout(t); res('closed code=' + e.code); };
+        const res = await new Promise((resolve) => {
+          let ws; const t = setTimeout(() => { try { ws.close(); } catch (e) {} resolve('timeout 8s'); }, 8000);
+          try { ws = new WebSocket(RELAY_URL.replace(/\/+$/, '') + '/room/ZZSELF?role=guest'); } catch (e) { clearTimeout(t); resolve('ctor ' + e); return; }
+          ws.onmessage = (m) => { clearTimeout(t); try { ws.close(); } catch (e) {} resolve(String(m.data).includes('NOT_FOUND') ? 'PASS (relay answered NOT_FOUND as expected)' : 'unexpected ' + m.data); };
+          ws.onerror = () => { clearTimeout(t); resolve('websocket error'); };
+          ws.onclose = (e) => { clearTimeout(t); resolve('closed code=' + e.code); };
         });
-        say('4) PeerJS broker WebSocket: ' + ok);
+        say('4) relay WebSocket: ' + res);
       } catch (e) { say('4) websocket threw: ' + e); }
       say('SELF TEST done. Full log: type fnfDumpLog() in console, or click COPY DEBUG LOG.');
     }
     window.fnfSelfTest = () => runNetSelfTest((t) => console.log(t));
+    // Relay server (Cloudflare Worker). Override: window.FNF_RELAY_URL or ?relay=wss://host in page URL.
+    const RELAY_URL = window.FNF_RELAY_URL || new URLSearchParams(location.search).get('relay') || 'wss://fnf-relay.proxy-roblox.workers.dev';
     const PEERJS_URL = 'https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js';
     const RELAY_PREFIX = 'fnfshowdown-';
     function loadPeerJs() {
@@ -1003,121 +970,6 @@
       } catch (e) {}
       return false;
     }
-
-
-    /**
-     * =========================================================================
-     * CUSTOM KEYBINDS
-     * =========================================================================
-     */
-    const KEYBINDS_KEY = 'fnf_upscroll_keybinds_v1';
-    const DEFAULT_KEYBINDS = {
-      solo: [['ArrowLeft', 'KeyD'], ['ArrowDown', 'KeyF'], ['ArrowUp', 'KeyJ'], ['ArrowRight', 'KeyK']],
-      p1:   [['KeyA'], ['KeyS'], ['KeyW'], ['KeyD']],
-      p2:   [['ArrowLeft'], ['ArrowDown'], ['ArrowUp'], ['ArrowRight']],
-      pause: 'KeyP',
-      reset: 'KeyR'
-    };
-
-    const KeyBinds = {
-      data: null,
-      mapSolo: new Map(),
-      map2p: new Map(),
-
-      clone(o) { return JSON.parse(JSON.stringify(o)); },
-
-      load() {
-        let d = this.clone(DEFAULT_KEYBINDS);
-        try {
-          const raw = JSON.parse(localStorage.getItem(KEYBINDS_KEY));
-          if (raw && typeof raw === 'object') {
-            ['solo', 'p1', 'p2'].forEach((g) => {
-              if (!Array.isArray(raw[g]) || raw[g].length !== 4) return;
-              d[g] = d[g].map((slots, lane) => slots.map((_, i) => {
-                const v = raw[g][lane] && raw[g][lane][i];
-                return (typeof v === 'string' && v) ? v : null;
-              }));
-            });
-            if (typeof raw.pause === 'string' || raw.pause === null) d.pause = raw.pause;
-            if (typeof raw.reset === 'string' || raw.reset === null) d.reset = raw.reset;
-          }
-        } catch (e) {}
-        this.data = d;
-        this.rebuild();
-      },
-
-      save() {
-        try { localStorage.setItem(KEYBINDS_KEY, JSON.stringify(this.data)); } catch (e) {}
-      },
-
-      reset() {
-        this.data = this.clone(DEFAULT_KEYBINDS);
-        this.rebuild();
-        this.save();
-      },
-
-      rebuild() {
-        this.mapSolo = new Map();
-        this.map2p = new Map();
-        this.data.solo.forEach((slots, lane) => slots.forEach((c) => { if (c) this.mapSolo.set(c, { target: 'p1', lane }); }));
-        this.data.p1.forEach((slots, lane) => slots.forEach((c) => { if (c) this.map2p.set(c, { target: 'p1', lane }); }));
-        this.data.p2.forEach((slots, lane) => slots.forEach((c) => { if (c) this.map2p.set(c, { target: 'p2', lane }); }));
-        window.dispatchEvent(new Event('keybindschanged'));
-      },
-
-      // Assign code to a cell. Steals code from any conflicting cell. Returns description of victim or null.
-      assign(group, lane, slot, code) {
-        let stolen = null;
-        const scopeGroups = group === 'solo' ? ['solo'] : (group === 'p1' || group === 'p2') ? ['p1', 'p2'] : ['solo', 'p1', 'p2'];
-        const clearIfSame = (g, l, i) => {
-          if (this.data[g][l][i] === code && !(g === group && l === lane && i === slot)) {
-            this.data[g][l][i] = null;
-            stolen = `${g === 'solo' ? '1P' : g.toUpperCase()} ${LANES[l].name}`;
-          }
-        };
-        // lane cells in same scope (pause/reset conflict with all)
-        const groups = (group === 'pause' || group === 'reset') ? ['solo', 'p1', 'p2'] : scopeGroups;
-        groups.forEach((g) => this.data[g].forEach((slots, l) => slots.forEach((_, i) => clearIfSame(g, l, i))));
-        ['pause', 'reset'].forEach((k) => {
-          if (k !== group && this.data[k] === code) { this.data[k] = null; stolen = k.toUpperCase(); }
-        });
-        if (group === 'pause' || group === 'reset') this.data[group] = code;
-        else this.data[group][lane][slot] = code;
-        this.rebuild();
-        this.save();
-        return stolen;
-      },
-
-      clear(group, lane, slot) {
-        if (group === 'pause' || group === 'reset') this.data[group] = null;
-        else this.data[group][lane][slot] = null;
-        this.rebuild();
-        this.save();
-      },
-
-      label(code) {
-        if (!code) return '—';
-        const special = {
-          ArrowLeft: '←', ArrowRight: '→', ArrowUp: '↑', ArrowDown: '↓',
-          Space: 'SPACE', Semicolon: ';', Quote: "'", Comma: ',', Period: '.', Slash: '/',
-          Backslash: '\\', BracketLeft: '[', BracketRight: ']', Minus: '-', Equal: '=', Backquote: '`',
-          ShiftLeft: 'L-SHIFT', ShiftRight: 'R-SHIFT', ControlLeft: 'L-CTRL', ControlRight: 'R-CTRL',
-          AltLeft: 'L-ALT', AltRight: 'R-ALT', Enter: 'ENTER', Backspace: 'BKSP', Tab: 'TAB', CapsLock: 'CAPS',
-          NumpadEnter: 'NUM-ENTER', NumpadAdd: 'NUM+', NumpadSubtract: 'NUM-', NumpadMultiply: 'NUM*', NumpadDivide: 'NUM/', NumpadDecimal: 'NUM.'
-        };
-        if (special[code]) return special[code];
-        if (code.startsWith('Key')) return code.slice(3);
-        if (code.startsWith('Digit')) return code.slice(5);
-        if (code.startsWith('Numpad')) return 'NUM' + code.slice(6);
-        return code.toUpperCase();
-      },
-
-      // e.g. "A S W D" for a player group, slot index = which slot to show (or all joined with /)
-      laneString(group) {
-        return this.data[group].map((slots) => slots.filter(Boolean).map((c) => this.label(c)).join('/') || '—');
-      }
-    };
-    KeyBinds.load();
 
     function midiToFreq(midi) {
       return 440 * Math.pow(2, (midi - 69) / 12);
@@ -1926,11 +1778,14 @@
         this.cloudAvailable = false;
         this.cb.onTransportStatus(true, navigator.onLine === false
           ? 'Room Code needs internet — use Offline LAN (Direct P2P)'
-          : 'Room Code Ready (online relay)');
+          : 'Room Code Ready (relay server)');
         this.checkUrlHashAutoJoin();
       }
 
       async initFirebase() {
+        this.enableRelayMode();
+        return;
+        // eslint-disable-next-line no-unreachable
         try {
           const rawConfig = typeof __firebase_config !== 'undefined' ? __firebase_config : null;
           if (!rawConfig) {
@@ -2063,8 +1918,8 @@
 
       async joinCloudRoom(rawCode) {
         const code = (rawCode || '').trim().toUpperCase();
-        if (code.length !== 4) {
-          showToast('Please enter a 4-letter Room Code.', '!');
+        if (!/^[A-Z0-9]{4,12}$/.test(code)) {
+          showToast('Please enter a valid Room Code.', '!');
           return;
         }
         if (!this.cloudAvailable || !this.user || !this.db) {
@@ -2149,169 +2004,137 @@
       }
 
       // =======================================================================
-      // ROOM CODE RELAY (PeerJS free broker -> WebRTC DataChannel, no Firebase)
+      // ROOM CODE via WebSocket relay (Cloudflare Worker + Durable Object)
+      // Server only forwards text frames host<->guest. No WebRTC, no ICE, no mDNS.
+      // Control frames from server: PEER_JOINED, PEER_LEFT, NOT_FOUND, FULL, ROOM_TAKEN, BAD_ROLE.
       // =======================================================================
+      generateRelayCode() {
+        const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        let code = '';
+        const buf = new Uint32Array(6);
+        crypto.getRandomValues(buf);
+        for (let i = 0; i < 6; i++) code += alphabet[buf[i] % alphabet.length];
+        return code;
+      }
+
+      openWs(code, role) {
+        const url = RELAY_URL.replace(/\/+$/, '') + '/room/' + code + '?role=' + role;
+        netLog('WS connecting', url);
+        return new Promise((resolve) => {
+          let ws = null, settled = false, tOpen = null, tAcc = null;
+          const early = [];
+          const finish = (r) => {
+            if (settled) return;
+            settled = true;
+            clearTimeout(tOpen); clearTimeout(tAcc);
+            r.early = early;
+            resolve(r);
+          };
+          try { ws = new WebSocket(url); } catch (e) { finish({ err: 'ctor ' + e }); return; }
+          tOpen = setTimeout(() => { netLog('WS open TIMEOUT 10s'); try { ws.close(); } catch (e) {} finish({ err: 'timeout' }); }, 10000);
+          ws.onopen = () => {
+            netLog('WS OPEN, waiting 500ms for refusal frame');
+            clearTimeout(tOpen);
+            tAcc = setTimeout(() => finish({ ws }), 500); // server sends no ACK; refusal arrives immediately
+          };
+          ws.onmessage = (e) => {
+            netLog('WS msg (pre-accept)', String(e.data).slice(0, 80));
+            if (settled) return;
+            try {
+              const m = JSON.parse(e.data);
+              if (['NOT_FOUND', 'FULL', 'ROOM_TAKEN', 'BAD_ROLE'].includes(m.type)) { try { ws.close(); } catch (er) {} finish({ refused: m.type }); return; }
+            } catch (er) {}
+            early.push(e.data);
+          };
+          ws.onerror = () => { netLog('WS ERROR'); finish({ err: 'error' }); };
+          ws.onclose = (e) => { netLog('WS CLOSE', e.code, e.reason); finish({ err: 'closed ' + e.code }); };
+        });
+      }
+
+      attachWs(ws, early) {
+        this.ws = ws;
+        this.dc = {
+          get readyState() { return ws.readyState === 1 ? 'open' : 'closed'; },
+          send: (str) => ws.send(str),
+          close: () => { try { ws.close(1000); } catch (e) {} }
+        };
+        ws.onmessage = (e) => this.onWsMessage(String(e.data));
+        ws.onclose = (e) => {
+          netLog('WS CLOSE', e.code, e.reason);
+          if (this.ws === ws && this.role) this.handleOpponentDisconnected('Lost connection to room server.');
+        };
+        ws.onerror = () => netLog('WS ERROR (post-accept)');
+        this.wsPing = setInterval(() => { try { if (ws.readyState === 1) ws.send('ping'); } catch (e) {} }, 25000);
+        for (const m of early || []) this.onWsMessage(String(m));
+      }
+
+      onWsMessage(raw) {
+        if (raw === 'pong') return;
+        try {
+          const m = JSON.parse(raw);
+          if (m && m.type === 'PEER_JOINED') { netLog('WS PEER_JOINED'); if (this.role === 'HOST') this.onLinkOpen(); return; }
+          if (m && m.type === 'PEER_LEFT') { netLog('WS PEER_LEFT'); if (this.role) this.handleOpponentDisconnected('Opponent left the room.'); return; }
+          if (m && ['NOT_FOUND', 'FULL', 'ROOM_TAKEN', 'BAD_ROLE'].includes(m.type)) return;
+        } catch (e) {}
+        this.onLinkData(raw);
+      }
+
       async hostRelayRoom(songIndex, difficulty, scrollMultiplier) {
         await this.leaveRoom(false);
-        this.setLiveStatus('Creating room... loading relay library.');
-        try {
-          await loadPeerJs();
-        } catch (e) {
-          this.setLiveStatus('ROOM CODE FAILED: could not load PeerJS from cdn.jsdelivr.net.\nNo internet, or adblock/firewall/VPN blocks it. Use OFFLINE LAN (DIRECT P2P) instead.', 'err');
-          showToast('Room Code needs internet. Use Offline LAN (Direct P2P)!', '!');
+        this.setLiveStatus('Creating room on relay server...');
+        let res = null, code = null;
+        for (let i = 0; i < 5; i++) {
+          code = this.generateRelayCode();
+          res = await this.openWs(code, 'host');
+          if (res.refused === 'ROOM_TAKEN') { netLog('code taken, retry', code); continue; }
+          break;
+        }
+        if (!res || !res.ws) {
+          const why = res && (res.refused || res.err) || 'unknown';
+          netLog('HOST FAILED', why);
+          this.setLiveStatus('ROOM CODE FAILED: ' + why + '.\nCannot reach relay ' + RELAY_URL + '\nCheck internet / VPN / adblock / firewall. Click RUN NETWORK TEST.', 'err');
+          showToast('Could not create room. See status box.', '!');
           return;
         }
-        this.setLiveStatus('Creating room... contacting relay server.');
-
-        let opened = false;
-        for (let attempt = 0; attempt < 8 && !opened; attempt++) {
-          const code = this.generateRoomCode();
-          try {
-            await new Promise((resolve, reject) => {
-              netLog('HOST: new Peer id=', RELAY_PREFIX + code, 'opts=', peerOpts());
-              const peer = new window.Peer(RELAY_PREFIX + code, peerOpts());
-              const t = setTimeout(() => { netLog('HOST: peer open TIMEOUT 9s (broker unreachable?)'); try { peer.destroy(); } catch (e) {} reject(new Error('timeout')); }, 9000);
-              peer.on('open', (id) => { clearTimeout(t); netLog('HOST: peer OPEN id=', id); this.peer = peer; resolve(); });
-              peer.on('error', (err) => {
-                netLog('HOST: peer ERROR type=', err && err.type, 'msg=', err && err.message);
-                clearTimeout(t);
-                try { peer.destroy(); } catch (e) {}
-                reject(err);
-              });
-            });
-            opened = true;
-            this.transport = 'P2P';
-            this.role = 'HOST';
-            this.roomCode = code;
-            this.roomState = {
-              code,
-              status: 'LOBBY',
-              songIndex,
-              difficulty,
-              scrollMultiplier,
-              startTimestamp: 0,
-              host: { ...this.createDefaultPlayerPayload(this.nickname), ready: true },
-              guest: null
-            };
-          } catch (err) {
-            if (err && err.type !== 'unavailable-id') {
-              this.setLiveStatus('ROOM CODE FAILED: relay server unreachable (' + ((err && (err.type || err.message)) || 'unknown') + ').\nCheck internet / VPN / adblock (blocks 0.peerjs.com websocket), or use OFFLINE LAN (DIRECT P2P).', 'err');
-              showToast('Could not reach room server. Check internet or use Offline LAN!', '!');
-              return;
-            }
-          }
-        }
-        if (!opened) {
-          showToast('Could not create room. Try again!', '!');
-          return;
-        }
-
-        this.peer.on('connection', (conn) => {
-          netLog('HOST: incoming connection from', conn.peer, 'open=', conn.open);
-          if (conn.peerConnection) hookPc(conn.peerConnection, 'HOST-PC');
-          conn.on('open', () => netLog('HOST: conn OPEN'));
-          conn.on('close', () => netLog('HOST: conn CLOSE'));
-          conn.on('error', (e) => netLog('HOST: conn ERROR', e && (e.type || e.message)));
-          setTimeout(() => { if (!conn.open) { netLog('HOST: conn still not open after 15s -> WebRTC ICE failing between peers'); dumpStats(conn.peerConnection, 'HOST-PC'); const cr = candidateReport(conn.peerConnection && conn.peerConnection.localDescription && conn.peerConnection.localDescription.sdp); netLog('HOST local candidate summary', cr); this.setLiveStatus('Guest reached relay but WebRTC link not opening (ICE). See console [FNF-NET]. Click RUN NETWORK TEST.' + (cr.host === 0 ? '\n\n' + HIDDEN_IP_HELP : (isMdnsOnly(cr) ? '\n\n' + MDNS_HELP : '')), 'err'); } }, 15000);
-          if (this.relayConn && this.relayConn.open) {
-            conn.on('open', () => { try { conn.send(JSON.stringify({ type: 'FULL' })); } catch (e) {} setTimeout(() => conn.close(), 300); });
-            return;
-          }
-          this.relayConn = conn;
-          this.bindRelayConn(conn);
-        });
-        this.peer.on('disconnected', () => { netLog('HOST: peer DISCONNECTED from broker, reconnecting'); try { this.peer.reconnect(); } catch (e) {} });
-        this.peer.on('close', () => netLog('HOST: peer CLOSE'));
-        this.peer.on('error', (e) => netLog('HOST: peer late ERROR', e && (e.type || e.message)));
-
+        this.transport = 'P2P';
+        this.role = 'HOST';
+        this.roomCode = code;
+        this.roomState = {
+          code,
+          status: 'LOBBY',
+          songIndex,
+          difficulty,
+          scrollMultiplier,
+          startTimestamp: 0,
+          host: { ...this.createDefaultPlayerPayload(this.nickname), ready: true },
+          guest: null
+        };
+        this.attachWs(res.ws, res.early);
         this.startHeartbeat();
-        this.setLiveStatus('Room ' + this.roomCode + ' open. Tell friend the code, waiting for Guest...', 'ok');
+        this.setLiveStatus('Room ' + code + ' open. Tell friend the code, waiting for Guest...', 'ok');
         this.cb.onRoomUpdated(this.roomState, this.role);
       }
 
       async joinRelayRoom(code) {
         await this.leaveRoom(false);
-        this.setLiveStatus('Joining ' + code + '... loading relay library.');
-        try {
-          await loadPeerJs();
-        } catch (e) {
-          this.setLiveStatus('ROOM CODE FAILED: could not load PeerJS from cdn.jsdelivr.net.\nNo internet, or adblock/firewall/VPN blocks it. Use OFFLINE LAN (DIRECT P2P) instead.', 'err');
-          showToast('Room Code needs internet. Use Offline LAN (Direct P2P)!', '!');
+        this.setLiveStatus('Joining ' + code + '...');
+        const res = await this.openWs(code, 'guest');
+        if (!res.ws) {
+          const msg = {
+            NOT_FOUND: 'Room "' + code + '" not found. Check code. Host must keep room open.',
+            FULL: 'Room "' + code + '" is full.',
+            BAD_ROLE: 'Client bug: bad role.'
+          }[res.refused] || ('JOIN FAILED (' + (res.err || res.refused) + '). Cannot reach relay ' + RELAY_URL + '. Check internet / VPN / adblock. Click RUN NETWORK TEST.');
+          netLog('JOIN FAILED', res);
+          this.setLiveStatus(msg, 'err');
+          showToast(res.refused ? msg : 'Could not join room. See status box.', '!');
           return;
         }
-        this.setLiveStatus('Joining ' + code + '... contacting host (up to 15s).');
-
         this.transport = 'P2P';
         this.role = 'GUEST';
         this.roomCode = code;
-
-        let stage = 'broker-connect';
-        let cRef = null;
-        try {
-          const conn = await new Promise((resolve, reject) => {
-            netLog('GUEST: new Peer opts=', peerOpts(), 'target=', RELAY_PREFIX + code);
-            const peer = new window.Peer(peerOpts());
-            this.peer = peer;
-            const t = setTimeout(() => { netLog('GUEST: TIMEOUT at stage=', stage); reject(Object.assign(new Error('timeout at ' + stage), { stage })); }, 15000);
-            peer.on('error', (err) => { netLog('GUEST: peer ERROR type=', err && err.type, 'msg=', err && err.message); clearTimeout(t); reject(err); });
-            peer.on('disconnected', () => netLog('GUEST: peer DISCONNECTED from broker'));
-            peer.on('close', () => netLog('GUEST: peer CLOSE'));
-            peer.on('open', (id) => {
-              stage = 'webrtc-link';
-              netLog('GUEST: broker OPEN, my id=', id, '-> connect() to', RELAY_PREFIX + code);
-              const c = peer.connect(RELAY_PREFIX + code, { reliable: true, serialization: 'json' });
-              cRef = c;
-              if (c.peerConnection) hookPc(c.peerConnection, 'GUEST-PC'); else netLog('GUEST: conn.peerConnection not available yet');
-              c.on('open', () => { netLog('GUEST: conn OPEN'); clearTimeout(t); resolve(c); });
-              c.on('close', () => netLog('GUEST: conn CLOSE'));
-              c.on('error', (err) => { netLog('GUEST: conn ERROR', err && (err.type || err.message)); clearTimeout(t); reject(err); });
-            });
-          });
-          this.relayConn = conn;
-          this.bindRelayConn(conn);
-          // connection already open: fire open handler manually
-          this.onLinkOpen();
-        } catch (err) {
-          const notFound = err && err.type === 'peer-unavailable';
-          netLog('GUEST: JOIN FAILED', { type: err && err.type, message: err && err.message, stage });
-          let hiddenIp = false;
-          let mdnsOnly = false;
-          if (cRef && cRef.peerConnection) {
-            await dumpStats(cRef.peerConnection, 'GUEST-PC');
-            const ld = cRef.peerConnection.localDescription;
-            const cr = candidateReport(ld && ld.sdp);
-            netLog('GUEST local candidate summary', cr);
-            hiddenIp = cr.host === 0;
-            mdnsOnly = isMdnsOnly(cr);
-          }
-          const peer = this.peer;
-          this.peer = null;
-          this.relayConn = null;
-          this.role = null;
-          this.roomCode = null;
-          this.roomState = null;
-          this.transport = 'CLOUD';
-          try { peer && peer.destroy(); } catch (e) {}
-          this.setLiveStatus(notFound
-            ? 'Room "' + code + '" not found. Check code, host must keep room open.'
-            : (stage === 'broker-connect'
-              ? 'JOIN FAILED at BROKER: cannot reach relay server (' + ((err && (err.type || err.message)) || 'unknown') + '). Internet/VPN/adblock/DNS blocks 0.peerjs.com. Click RUN NETWORK TEST.'
-              : 'JOIN FAILED at WEBRTC LINK: broker OK but peers cannot connect (ICE). Host probably did not log a connection, or WebRTC UDP blocked. Click RUN NETWORK TEST, check console [FNF-NET].' + (hiddenIp ? '\n\n' + HIDDEN_IP_HELP : (mdnsOnly ? '\n\n' + MDNS_HELP : ''))), 'err');
-          showToast(notFound ? `Room "${code}" not found! Check the code.` : 'Could not join room. Check internet / code.', '!');
-        }
-      }
-
-      bindRelayConn(conn) {
-        this.dc = {
-          get readyState() { return conn.open ? 'open' : 'closed'; },
-          send: (str) => conn.send(str),
-          close: () => { try { conn.close(); } catch (e) {} }
-        };
-        conn.on('data', (d) => this.onLinkData(typeof d === 'string' ? d : JSON.stringify(d)));
-        conn.on('close', () => this.onLinkClose());
-        conn.on('error', () => this.onLinkClose());
-        if (conn.open && this.role === 'HOST') this.onLinkOpen();
-        else if (this.role === 'HOST') conn.on('open', () => this.onLinkOpen());
+        this.attachWs(res.ws, res.early);
+        this.onLinkOpen(); // sends HELLO_GUEST
       }
 
       // Shared link handlers (RTCDataChannel or PeerJS connection)
@@ -2395,6 +2218,8 @@
 
       cleanupLocalRoomState() {
         this.stopHeartbeat();
+        if (this.wsPing) { clearInterval(this.wsPing); this.wsPing = null; }
+        this.ws = null; // null first so onclose handler ignores our own close
         if (this.unsubRoom) {
           this.unsubRoom();
           this.unsubRoom = null;
@@ -4194,13 +4019,13 @@
         const controlsHint = document.getElementById('menuControlsHint');
         if (this.gameMode === 'SOLO') {
           startLabel.textContent = 'START 1P BATTLE!';
-          controlsHint.innerHTML = `<span><b class="text-[#00FFFF]">Keys:</b> ${KeyBinds.laneString('solo').join('&nbsp;&nbsp;')} / Touch</span><span><b class="text-amber-300">Pause:</b> ESC${KeyBinds.data.pause ? ' / ' + KeyBinds.label(KeyBinds.data.pause) : ''} • <b class="text-amber-300">Reset:</b> ${KeyBinds.label(KeyBinds.data.reset)}</span>`;
+          controlsHint.innerHTML = '<span><b class="text-[#00FFFF]">Controls:</b> Arrow Keys / DFJK / WASD / Touch</span><span><b class="text-amber-300">Pause:</b> ESC / P • <b class="text-amber-300">Reset:</b> R</span>';
         } else if (this.gameMode === 'LAN') {
           startLabel.textContent = 'OPEN LAN MULTIPLAYER LOBBY';
           controlsHint.innerHTML = '<span><b class="text-[#12FA05]">LAN Multiplayer:</b> Host or Join via 4-Letter Room Code or Offline Direct P2P</span>';
         } else {
           startLabel.textContent = 'START LOCAL 2P SHOWDOWN!';
-          controlsHint.innerHTML = `<span><b class="text-[#00FFFF]">P1 (Left):</b> ${KeyBinds.laneString('p1').join(' ')}</span><span><b class="text-[#C24B99]">P2 (Right):</b> ${KeyBinds.laneString('p2').join(' ')}</span><span><b class="text-amber-300">Pause:</b> ESC</span>`;
+          controlsHint.innerHTML = '<span><b class="text-[#00FFFF]">P1 (Left):</b> A S W D</span><span><b class="text-[#C24B99]">P2 (Right):</b> ← ↓ ↑ →</span><span><b class="text-amber-300">Pause:</b> ESC</span>';
         }
 
         document.querySelectorAll('.diff-btn').forEach((btn) => {
@@ -4620,20 +4445,59 @@
       }
 
       resolveLaneFromKeyCode(code) {
-        const map = this.gameMode === 'LOCAL2P' ? KeyBinds.map2p : KeyBinds.mapSolo;
-        return map.get(code) || null;
+        // In LOCAL 2P mode: WASD = Player 1 (Left Highway), Arrow Keys = Player 2 (Right Highway)
+        if (this.gameMode === 'LOCAL2P') {
+          if (code === 'KeyA') return { target: 'p1', lane: 0 };
+          if (code === 'KeyS') return { target: 'p1', lane: 1 };
+          if (code === 'KeyW') return { target: 'p1', lane: 2 };
+          if (code === 'KeyD') return { target: 'p1', lane: 3 };
+
+          if (code === 'ArrowLeft')  return { target: 'p2', lane: 0 };
+          if (code === 'ArrowDown')  return { target: 'p2', lane: 1 };
+          if (code === 'ArrowUp')    return { target: 'p2', lane: 2 };
+          if (code === 'ArrowRight') return { target: 'p2', lane: 3 };
+          return null;
+        }
+
+        // In 1P SOLO & LAN MULTIPLAYER: Arrow Keys, DFJK, or WASD all control the player's highway
+        if (code === 'ArrowLeft' || code === 'KeyA') {
+          if (code === 'KeyA') this.lastControlScheme = 'WASD';
+          return { target: 'p1', lane: 0 };
+        }
+        if (code === 'ArrowDown' || code === 'KeyS' || code === 'KeyF') {
+          if (code === 'KeyF') this.lastControlScheme = 'DFJK';
+          return { target: 'p1', lane: 1 };
+        }
+        if (code === 'ArrowUp' || code === 'KeyW' || code === 'KeyJ') {
+          if (code === 'KeyW') this.lastControlScheme = 'WASD';
+          if (code === 'KeyJ') this.lastControlScheme = 'DFJK';
+          return { target: 'p1', lane: 2 };
+        }
+        if (code === 'ArrowRight' || code === 'KeyK') {
+          if (code === 'KeyK') this.lastControlScheme = 'DFJK';
+          return { target: 'p1', lane: 3 };
+        }
+        if (code === 'KeyD') {
+          if (this.lastControlScheme === 'WASD') return { target: 'p1', lane: 3 };
+          if (this.state === 'PLAYING') {
+            const has0 = this.p1.notes.some((n) => !n.hit && !n.missed && n.lane === 0 && Math.abs(n.time - this.songTime) <= JUDGEMENT_WINDOWS.bad);
+            const has3 = this.p1.notes.some((n) => !n.hit && !n.missed && n.lane === 3 && Math.abs(n.time - this.songTime) <= JUDGEMENT_WINDOWS.bad);
+            if (has3 && !has0) return { target: 'p1', lane: 3 };
+          }
+          return { target: 'p1', lane: 0 };
+        }
+        return null;
       }
 
       bindInputs() {
         window.addEventListener('keydown', (e) => {
           if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) return;
-          if (!document.getElementById('keybindOverlay').classList.contains('hidden')) return;
           if (e.code === 'Space' || e.code.startsWith('Arrow')) {
             e.preventDefault();
           }
           if (e.repeat) return;
 
-          if (e.code === 'Escape' || (KeyBinds.data.pause && e.code === KeyBinds.data.pause)) {
+          if (e.code === 'Escape' || e.code === 'KeyP') {
             if (this.gameMode !== 'LAN') {
               if (this.state === 'PLAYING' || this.state === 'COUNTDOWN') {
                 e.preventDefault();
@@ -4646,7 +4510,7 @@
             return;
           }
 
-          if (KeyBinds.data.reset && e.code === KeyBinds.data.reset) {
+          if (e.code === 'KeyR') {
             if (this.gameMode !== 'LAN' && (this.state === 'PLAYING' || this.state === 'COUNTDOWN' || this.state === 'PAUSED')) {
               e.preventDefault();
               this.startSong(false);
@@ -4867,7 +4731,7 @@
           const r1 = this.computeRank(this.p1.stats);
           const r2 = this.computeRank(this.p2.stats);
           p1Data = {
-            name: `Player 1 (${KeyBinds.laneString('p1').join(' ')})`,
+            name: 'Player 1 (WASD)',
             score: this.p1.stats.score,
             acc: r1.accNum,
             rank: r1.rank,
@@ -4878,7 +4742,7 @@
             miss: this.p1.stats.miss
           };
           p2Data = {
-            name: `Player 2 (${KeyBinds.laneString('p2').join(' ')})`,
+            name: 'Player 2 (Arrows)',
             score: this.p2.stats.score,
             acc: r2.accNum,
             rank: r2.rank,
@@ -5345,7 +5209,7 @@
               lanePressed: this.p1.lanePressed,
               laneFlashTimers: this.p1.laneFlashTimers,
               hitBursts: this.p1.hitBursts,
-              keyHints: KeyBinds.laneString('p1'),
+              keyHints: ['A', 'S', 'W', 'D'],
               headerTag: `P1: ${String(this.p1.stats.score).padStart(6, '0')} (${this.p1.stats.combo}x)`,
               headerColor: '#00FFFF'
             });
@@ -5361,7 +5225,7 @@
               lanePressed: this.p2.lanePressed,
               laneFlashTimers: this.p2.laneFlashTimers,
               hitBursts: this.p2.hitBursts,
-              keyHints: KeyBinds.laneString('p2'),
+              keyHints: ['←', '↓', '↑', '→'],
               headerTag: `P2: ${String(this.p2.stats.score).padStart(6, '0')} (${this.p2.stats.combo}x)`,
               headerColor: '#C24B99'
             });
@@ -5369,7 +5233,7 @@
             this.renderer.drawJudgementPopup(this.p1.judgementPopup, L.dualLeftHwX + L.dualHwW / 2, L.receptorY + 120);
             this.renderer.drawJudgementPopup(this.p2.judgementPopup, L.dualRightHwX + L.dualHwW / 2, L.receptorY + 120);
             this.renderer.drawForegroundCrowd(beatPulse, activeTime);
-            this.renderer.drawTugOfWarHealthBar(this.health, `PLAYER 1 (${KeyBinds.laneString('p1').join(' ')})`, `PLAYER 2 (${KeyBinds.laneString('p2').join(' ')})`, beatPulse);
+            this.renderer.drawTugOfWarHealthBar(this.health, 'PLAYER 1 (WASD)', 'PLAYER 2 (ARROWS)', beatPulse);
 
             this.renderer.drawTopHUD(
               song,
@@ -5402,7 +5266,7 @@
               lanePressed: this.p1.lanePressed,
               laneFlashTimers: this.p1.laneFlashTimers,
               hitBursts: this.p1.hitBursts,
-              keyHints: KeyBinds.laneString('solo').map((t) => t.replace('/', ' / ')),
+              keyHints: ['← / A', '↓ / F', '↑ / J', '→ / K'],
               headerTag: isLan ? `YOU (${this.lan.nickname.toUpperCase()})` : null,
               headerColor: '#00FFFF'
             });
@@ -5434,148 +5298,8 @@
       }
     }
 
-
-    function initKeybindUI(game) {
-      const btn = document.getElementById('btnKeybinds');
-      const overlay = document.getElementById('keybindOverlay');
-      const body = document.getElementById('keybindBody');
-      const help = document.getElementById('keybindHelp');
-      const hidden = (id) => document.getElementById(id).classList.contains('hidden');
-      let tab = 'solo';
-      let listening = null; // { group, lane, slot }
-
-      const isListening = (g, l, i) => listening && listening.group === g && listening.lane === l && listening.slot === i;
-
-      function keyBox(group, lane, slot) {
-        const code = (group === 'pause' || group === 'reset') ? KeyBinds.data[group] : KeyBinds.data[group][lane][slot];
-        const on = isListening(group, lane, slot);
-        const txt = on ? 'PRESS KEY...' : KeyBinds.label(code);
-        return `<button type="button" data-g="${group}" data-l="${lane}" data-s="${slot}"
-          class="kb-box btn-fnf min-w-[5.5rem] px-3 py-1.5 rounded-xl font-mono-num text-sm font-extrabold cursor-pointer ${on ? 'bg-amber-400 text-slate-950 animate-pulse' : (code ? 'bg-slate-800 text-white' : 'bg-slate-900 text-slate-500')}">${txt}</button>`;
-      }
-
-      function render() {
-        document.querySelectorAll('.kb-tab').forEach((t) => {
-          const active = t.dataset.kbtab === tab;
-          t.className = `kb-tab btn-fnf flex-1 py-1.5 rounded-xl font-fnf text-lg cursor-pointer ${active ? 'bg-[#00FFFF] text-slate-950' : 'bg-slate-700 text-white'}`;
-        });
-        let h = '';
-        if (tab === 'solo') {
-          h += '<div class="grid grid-cols-[1fr_auto_auto] items-center gap-x-2 gap-y-2"><div class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">Lane</div><div class="text-[11px] uppercase tracking-wider text-slate-400 font-bold text-center">Key 1</div><div class="text-[11px] uppercase tracking-wider text-slate-400 font-bold text-center">Key 2</div>';
-          for (let l = 0; l < 4; l++) {
-            h += `<div class="font-fnf text-xl tracking-wider" style="color:${LANES[l].color}">${LANES[l].name}</div>${keyBox('solo', l, 0)}${keyBox('solo', l, 1)}`;
-          }
-          h += '</div>';
-        } else {
-          h += '<div class="grid grid-cols-[1fr_auto_auto] items-center gap-x-2 gap-y-2"><div class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">Lane</div><div class="text-[11px] uppercase tracking-wider text-[#00FFFF] font-bold text-center">Player 1</div><div class="text-[11px] uppercase tracking-wider text-[#C24B99] font-bold text-center">Player 2</div>';
-          for (let l = 0; l < 4; l++) {
-            h += `<div class="font-fnf text-xl tracking-wider" style="color:${LANES[l].color}">${LANES[l].name}</div>${keyBox('p1', l, 0)}${keyBox('p2', l, 0)}`;
-          }
-          h += '</div>';
-        }
-        h += `<div class="mt-3 pt-3 border-t-2 border-slate-800 grid grid-cols-[1fr_auto] items-center gap-x-2 gap-y-2">
-          <div class="font-fnf text-xl tracking-wider text-amber-300">PAUSE <span class="text-slate-500 text-sm">(ESC always works)</span></div>${keyBox('pause', 0, 0)}
-          <div class="font-fnf text-xl tracking-wider text-amber-300">RESTART</div>${keyBox('reset', 0, 0)}
-        </div>`;
-        body.innerHTML = h;
-        help.textContent = listening
-          ? 'Press new key now. ESC cancels. BACKSPACE clears slot.'
-          : 'Click key box, then press new key. Duplicate key steals from old slot.';
-      }
-
-      function open() {
-        listening = null;
-        overlay.classList.remove('hidden');
-        render();
-      }
-      function close() {
-        listening = null;
-        overlay.classList.add('hidden');
-      }
-
-      btn.addEventListener('click', open);
-      document.getElementById('btnKeybindClose').addEventListener('click', close);
-      document.getElementById('btnKeybindReset').addEventListener('click', () => {
-        listening = null;
-        KeyBinds.reset();
-        render();
-        showToast('Keybinds reset to defaults.', '★');
-      });
-      document.querySelectorAll('.kb-tab').forEach((t) => t.addEventListener('click', () => {
-        tab = t.dataset.kbtab;
-        listening = null;
-        render();
-      }));
-      body.addEventListener('click', (e) => {
-        const box = e.target.closest('.kb-box');
-        if (!box) return;
-        listening = { group: box.dataset.g, lane: +box.dataset.l, slot: +box.dataset.s };
-        render();
-      });
-      overlay.addEventListener('pointerdown', (e) => { if (e.target === overlay) close(); });
-
-      // Capture-phase: swallow every key while modal is open so game never sees it.
-      window.addEventListener('keydown', (e) => {
-        if (overlay.classList.contains('hidden')) return;
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        if (e.repeat) return;
-        if (!listening) {
-          if (e.code === 'Escape') close();
-          return;
-        }
-        if (e.code === 'Escape') { listening = null; render(); return; }
-        if (e.code === 'Backspace' || e.code === 'Delete') {
-          KeyBinds.clear(listening.group, listening.lane, listening.slot);
-          listening = null;
-          render();
-          return;
-        }
-        if (e.code === 'MetaLeft' || e.code === 'MetaRight' || !e.code) return;
-        const stolen = KeyBinds.assign(listening.group, listening.lane, listening.slot, e.code);
-        listening = null;
-        render();
-        if (stolen) showToast(`${KeyBinds.label(e.code)} moved from ${stolen}.`, '!');
-      }, true);
-      window.addEventListener('keyup', (e) => {
-        if (!overlay.classList.contains('hidden')) e.stopImmediatePropagation();
-      }, true);
-
-      // Keep labels fresh when binds change.
-      function updateLabels() {
-        const r = KeyBinds.label(KeyBinds.data.reset);
-        const hudR = document.getElementById('hudResetKeyLabel');
-        const pauseR = document.getElementById('pauseResetKeyLabel');
-        if (hudR) hudR.textContent = r;
-        if (pauseR) pauseR.textContent = r;
-        const rb = document.getElementById('btnResetHud');
-        if (rb) rb.title = `Restart Song (${r})`;
-      }
-      window.addEventListener('keybindschanged', () => {
-        updateLabels();
-        if (game.state === 'MENU') game.renderMenuUI();
-      });
-      updateLabels();
-      game.renderMenuUI();
-
-      // Show button on menu + pause only. Never mid-song.
-      let lastVis = null;
-      setInterval(() => {
-        const menu = !hidden('menuOverlay');
-        const paused = !hidden('pauseOverlay');
-        const vis = (menu || paused) && overlay.classList.contains('hidden');
-        const key = vis ? (paused ? 'p' : 'm') : 'x';
-        if (key === lastVis) return;
-        lastVis = key;
-        btn.classList.toggle('hidden', !vis);
-        btn.classList.toggle('flex', vis);
-        btn.style.top = paused ? (window.innerWidth >= 640 ? '4.75rem' : '4rem') : '';
-      }, 120);
-    }
-
     window.addEventListener('DOMContentLoaded', () => {
       window.__stageShowdownGame = new StageShowdownGame();
-      initKeybindUI(window.__stageShowdownGame);
     });
   </script>
 </body>
